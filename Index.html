@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Today Is Our Proposal Day 💍</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#ff4d6d,#3a0ca3);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+}
+
+/* Floating hearts */
+.heart{
+    position:absolute;
+    bottom:-50px;
+    font-size:22px;
+    animation:floatUp 6s linear infinite;
+    color:#ffccd5;
+}
+
+@keyframes floatUp{
+    from{ transform:translateY(0); opacity:1; }
+    to{ transform:translateY(-120vh) scale(1.6); opacity:0; }
+}
+
+/* Main Card */
+.card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(14px);
+    padding:50px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 0 50px rgba(255,255,255,0.4);
+    animation:zoomIn 1.5s ease;
+}
+
+@keyframes zoomIn{
+    from{ transform:scale(0.4); opacity:0; }
+    to{ transform:scale(1); opacity:1; }
+}
+
+h1{
+    font-size:3rem;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 10px white; }
+    to{ text-shadow:0 0 30px #ffccd5; }
+}
+
+p{
+    margin:20px 0 30px;
+    font-size:1.3rem;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+}
+
+button{
+    padding:15px 45px;
+    border:none;
+    border-radius:40px;
+    font-size:1.1rem;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+#yes{
+    background:#ffccd5;
+    color:#3a0ca3;
+}
+
+#yes:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 25px #ffccd5;
+}
+
+#no{
+    background:#3a0ca3;
+    color:white;
+}
+
+/* Celebration */
+#celebrate{
+    display:none;
+    margin-top:30px;
+    animation:pop 1s ease;
+}
+
+@keyframes pop{
+    from{ transform:scale(0); }
+    to{ transform:scale(1); }
+}
+
+#celebrate img{
+    width:200px;
+    border-radius:20px;
+    margin-top:15px;
+    box-shadow:0 0 25px rgba(255,255,255,0.6);
+}
+
+/* Fireworks dots */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+    to{
+        transform:translate(var(--x),var(--y));
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" autoplay loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+    <h1>💖 HER_NAME 💖</h1>
+    <p>
+        From the moment I met you,  
+        my heart knew one thing…  
+        <br><br>
+        <b>Will you be mine forever? 💍</b>
+    </p>
+
+    <div class="buttons">
+        <button id="yes">YES 😍</button>
+        <button id="no">NO 🙈</button>
+    </div>
+
+    <div id="celebrate">
+        <h1>🎉 I LOVE YOU 🎉</h1>
+        <p>— YOUR_NAME</p>
+        <img src="photo.jpg" alt="Us">
+    </div>
+</div>
+
+<script>
+// Hearts
+function heart(){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+}
+setInterval(heart,250);
+
+// NO button escape
+const no=document.getElementById("no");
+no.addEventListener("mouseover",()=>{
+    no.style.transform=`translate(${Math.random()*300-150}px,${Math.random()*200-100}px)`;
+});
+
+// YES celebration
+document.getElementById("yes").onclick=()=>{
+    document.getElementById("celebrate").style.display="block";
+    fireworks();
+};
+
+// Fireworks
+function fireworks(){
+    for(let i=0;i<80;i++){
+        const f=document.createElement("div");
+        f.className="firework";
+        f.style.left="50%";
+        f.style.top="50%";
+        f.style.setProperty("--x",(Math.random()*400-200)+"px");
+        f.style.setProperty("--y",(Math.random()*400-200)+"px");
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    }
+}
+</script>
+
+</body>
+          </html>
